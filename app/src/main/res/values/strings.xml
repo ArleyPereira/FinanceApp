@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Finance APP</string>
+
+
+    <!-- Dialog ganhos -->
+    <string name="edt_hint_description">Descrição</string>
+    <string name="btn_text_close">Fechar</string>
+    <string name="btn_text_save">Salvar</string>
+
+    <!-- Criar Conta Activity -->
+    <string name="authentication_edt_name">Nome</string>
+    <string name="authentication_edt_email">E-mail</string>
+    <string name="authentication_edt_password">Senha</string>
+    <string name="authentication_btn_register">Criar conta</string>
+    <string name="authentication_register_error_name">Informe seu nome.</string>
+    <string name="authentication_register_error_email">Informe seu e-mail.</string>
+    <string name="authentication_register_error_password">Informe uma senha.</string>
+
+    <!-- Login Activity -->
+    <string name="authentication_btn_login">Entrar</string>
+    <string name="authentication_text_create_account">Criar conta</string>
+    <string name="authentication_text_recover_account">Recuperar conta</string>
+
+    <string name="text_value">R$ %1$s</string>
+    <string name="text_value_negative">R$ -%1$s</string>
+
+
+</resources>

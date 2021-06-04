@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_gastos">
+
+    <EditText
+        android:id="@+id/edt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_edit"
+        android:textColorHint="#F5A7C9"
+        android:textColor="#F5A7C9"
+        android:inputType="textCapWords"
+        android:hint="@string/edt_hint_description"
+        android:padding="16dp" />
+
+    <com.blackcat.currencyedittext.CurrencyEditText
+        android:id="@+id/edt_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="#F5A7C9"
+        android:background="@drawable/bg_edit"
+        android:padding="16dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.widget.Button
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:textColor="#F5A7C9"
+            style="?android:attr/borderlessButtonStyle"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_btn"
+            android:layout_marginTop="16dp"
+            android:text="@string/btn_text_close"/>
+
+        <android.widget.Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:textColor="#F5A7C9"
+            style="?android:attr/borderlessButtonStyle"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_btn"
+            android:layout_marginTop="16dp"
+            android:text="@string/btn_text_save"/>
+
+    </LinearLayout>
+
+</LinearLayout>
