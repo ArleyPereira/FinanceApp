@@ -24,7 +24,7 @@ class GetMask {
 
         fun getDate(time: Long, tipo: Int): String {
 
-            // 1 -> dia/mes (26 outubro)
+            // 1 -> dia/mes (26 jan)
             // 2 -> dia/mes hora:minuto (26/10 às 07:45)
             // 3 -> dia/mes/ano
             // 4 -> dia/mes/ano hora:minuto (26/10/2020 às 07:45)
@@ -62,24 +62,24 @@ class GetMask {
 
             if (tipo == DIA_MES) {
                 mes = when (mes) {
-                    "01" -> "janeiro"
-                    "02" -> "fevereiro"
-                    "03" -> "março"
-                    "04" -> "abril"
-                    "05" -> "maio"
-                    "06" -> "junho"
-                    "07" -> "julho"
-                    "08" -> "agosto"
-                    "09" -> "setembro"
-                    "10" -> "outubro"
-                    "11" -> "novembro"
-                    "12" -> "novembro"
+                    "01" -> "jan"
+                    "02" -> "fev"
+                    "03" -> "mar"
+                    "04" -> "abr"
+                    "05" -> "mai"
+                    "06" -> "jun"
+                    "07" -> "jul"
+                    "08" -> "ago"
+                    "09" -> "set"
+                    "10" -> "out"
+                    "11" -> "nov"
+                    "12" -> "dez"
                     else -> ""
                 }
             }
 
             return when (tipo) {
-                DIA_MES -> "${dia}/${mes}"
+                DIA_MES -> "$dia $mes"
                 DIA_MES_HORA -> "${dia}/${mes} às ${hora}:${minuto}"
                 DIA_MES_ANO -> "${dia}/${mes}/${ano}"
                 DIA_MES_ANO_HORA -> "${dia}/${mes}/${ano} às ${hora}:${minuto}"

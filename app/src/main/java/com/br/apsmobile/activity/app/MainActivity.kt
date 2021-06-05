@@ -76,17 +76,13 @@ class MainActivity : AppCompatActivity() {
                         type = "ganhos"
                     )
 
-                    movimentList.add(movimento)
-                    adapterMoviment.notifyDataSetChanged()
-                    configBalance()
-
                     movimentoRef.set(movimento)
 
                     val updates = hashMapOf<String, Any>(
                         "date" to FieldValue.serverTimestamp()
                     )
 
-                    movimentoRef.update(updates).addOnCompleteListener {}
+                    movimentoRef.update(updates).addOnCompleteListener { getMoviments() }
 
                     dialog.dismiss()
 
@@ -136,17 +132,15 @@ class MainActivity : AppCompatActivity() {
                         type = "gastos"
                     )
 
-                    movimentList.add(movimento)
-                    adapterMoviment.notifyDataSetChanged()
-                    configBalance()
-
                     movimentoRef.set(movimento)
 
                     val updates = hashMapOf<String, Any>(
                         "date" to FieldValue.serverTimestamp()
                     )
 
-                    movimentoRef.update(updates).addOnCompleteListener {}
+                    movimentoRef.update(updates).addOnCompleteListener {
+                        getMoviments()
+                    }
 
                     dialog.dismiss()
 
@@ -166,12 +160,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getMoviments(){
+    private fun getMoviments() {
         db.collection("movimentos")
             .document(GetFirebase.getIdFirebase())
             .collection("movimentos")
             .get()
-            .addOnSuccessListener { documentSnapshot  ->
+            .addOnSuccessListener { documentSnapshot ->
+                movimentList.clear()
                 for (moviment in documentSnapshot) {
                     val mov = moviment.toObject(Moviment::class.java)
                     movimentList.add(mov)
@@ -189,24 +184,24 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    private fun configRv(){
+    private fun configRv() {
         rv_moviments.layoutManager = LinearLayoutManager(this)
         rv_moviments.setHasFixedSize(true)
         adapterMoviment = AdapterMoviments(movimentList, this)
         rv_moviments.adapter = adapterMoviment
     }
 
-    private fun configBalance(){
+    private fun configBalance() {
 
         text_balance.text = ""
 
         var gastos = 0.0
         var ganhos = 0.0
 
-        for (movimento in movimentList){
-            if(movimento.type == "gastos"){
+        for (movimento in movimentList) {
+            if (movimento.type == "gastos") {
                 gastos += movimento.value
-            }else {
+            } else {
                 ganhos += movimento.value
             }
         }

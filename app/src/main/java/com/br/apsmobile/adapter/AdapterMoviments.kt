@@ -11,6 +11,8 @@ import com.br.apsmobile.R
 import com.br.apsmobile.helper.GetMask
 import com.br.apsmobile.model.Moviment
 import kotlinx.android.synthetic.main.layout_item_movimento.view.*
+import java.sql.Timestamp
+import java.util.*
 
 class AdapterMoviments(
     private var movimentList: MutableList<Moviment> = mutableListOf(),
@@ -27,13 +29,16 @@ class AdapterMoviments(
 
         holder.text_description_movement.text = moviment.description
 
+        holder.text_date_movement.text = moviment.date?.let { GetMask.getDate(it.time, 1) }
 
         if(moviment.type == "gastos"){
             holder.text_value_movement.text = context.getString(R.string.text_value_negative, GetMask.getValue(moviment.value))
-            holder.ll_type.setImageResource(R.drawable.bg_gastos)
+            holder.img_bg_type.setImageResource(R.drawable.bg_gastos)
+            holder.img_type.setImageResource(R.drawable.ic_arrow_up)
         }else {
             holder.text_value_movement.text = context.getString(R.string.text_value, GetMask.getValue(moviment.value))
-            holder.ll_type.setImageResource(R.drawable.bg_ganhos)
+            holder.img_bg_type.setImageResource(R.drawable.bg_ganhos)
+            holder.img_type.setImageResource(R.drawable.ic_arrow_down)
         }
 
     }
@@ -41,8 +46,10 @@ class AdapterMoviments(
     override fun getItemCount() = movimentList.size
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val ll_type: ImageView = itemView.img_type
+        val img_bg_type: ImageView = itemView.img_bg_type
+        val img_type: ImageView = itemView.img_type
         val text_description_movement: TextView = itemView.text_description_movement
+        val text_date_movement: TextView = itemView.text_date_movement
         val text_value_movement: TextView = itemView.text_value_movement
     }
 }
