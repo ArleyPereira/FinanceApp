@@ -21,8 +21,14 @@
     <string name="authentication_text_create_account">Criar conta</string>
     <string name="authentication_text_recover_account">Recuperar conta</string>
 
+    <!-- Recupera Conta Activity -->
+    <string name="recover_account_btn_send">Enviar</string>
+    <string name="recover_account_edt_email">E-mail</string>
+
     <string name="text_value">R$ %1$s</string>
     <string name="text_value_negative">R$ -%1$s</string>
+    <string name="recover_account_text_info">Insira seu e-mail cadastrado para receber \num link para alterar sua senha.</string>
+    <string name="recover_account_error_email">Informe o e-mail cadastrado.</string>
 
 
 </resources>

@@ -1,11 +1,12 @@
 package com.br.apsmobile.activity.app
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.br.apsmobile.model.Moviment
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import java.sql.Timestamp
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         configCliques()
 
         getMoviments()
+
+        configDate()
     }
 
     private fun configCliques() {
@@ -51,17 +55,24 @@ class MainActivity : AppCompatActivity() {
         val alertDialog = AlertDialog.Builder(this, R.style.CustomAlertDialog)
         alertDialog.setView(view)
 
+        val progress_bar = view.findViewById<ProgressBar>(R.id.progress_bar)
+        val btn_save = view.findViewById<Button>(R.id.btn_save)
+        val btn_close = view.findViewById<Button>(R.id.btn_close)
         val edt_description = view.findViewById<EditText>(R.id.edt_description)
         val edt_value = view.findViewById<CurrencyEditText>(R.id.edt_value)
         edt_value.locale = Locale("PT", "br")
 
-        view.findViewById<Button>(R.id.btn_save).setOnClickListener {
+        btn_save.setOnClickListener {
 
             val description = edt_description.text.toString()
             val value = edt_value.rawValue / 100
 
             if (description.isNotBlank()) {
                 if (value > 0) {
+
+                    progress_bar.visibility = View.VISIBLE
+                    btn_save.visibility = View.GONE
+                    btn_close.visibility = View.GONE
 
                     val movimentoRef = db
                         .collection("movimentos")
@@ -82,9 +93,19 @@ class MainActivity : AppCompatActivity() {
                         "date" to FieldValue.serverTimestamp()
                     )
 
-                    movimentoRef.update(updates).addOnCompleteListener { getMoviments() }
-
-                    dialog.dismiss()
+                    movimentoRef.update(updates).addOnCompleteListener {
+                        movimentoRef.addSnapshotListener { snapshot, e ->
+                            if (snapshot != null && snapshot.exists()) {
+                                val moviment = snapshot.toObject(Moviment::class.java)
+                                if (moviment != null) {
+                                    movimentList.add(moviment)
+                                    adapterMoviment.notifyDataSetChanged()
+                                    configBalance()
+                                    dialog.dismiss()
+                                }
+                            }
+                        }
+                    }
 
                 } else {
                     edt_value.error = "Informe o valor."
@@ -95,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        view.findViewById<Button>(R.id.btn_close).setOnClickListener { dialog.dismiss() }
+        btn_close.setOnClickListener { dialog.dismiss() }
 
         dialog = alertDialog.create()
         dialog.show()
@@ -107,17 +128,24 @@ class MainActivity : AppCompatActivity() {
         val alertDialog = AlertDialog.Builder(this, R.style.CustomAlertDialog)
         alertDialog.setView(view)
 
+        val progress_bar = view.findViewById<ProgressBar>(R.id.progress_bar)
+        val btn_save = view.findViewById<Button>(R.id.btn_save)
+        val btn_close = view.findViewById<Button>(R.id.btn_close)
         val edt_description = view.findViewById<EditText>(R.id.edt_description)
         val edt_value = view.findViewById<CurrencyEditText>(R.id.edt_value)
         edt_value.locale = Locale("PT", "br")
 
-        view.findViewById<Button>(R.id.btn_save).setOnClickListener {
+        btn_save.setOnClickListener {
 
             val description = edt_description.text.toString()
             val value = edt_value.rawValue / 100
 
             if (description.isNotBlank()) {
                 if (value > 0) {
+
+                    progress_bar.visibility = View.VISIBLE
+                    btn_save.visibility = View.GONE
+                    btn_close.visibility = View.GONE
 
                     val movimentoRef = db
                         .collection("movimentos")
@@ -139,10 +167,18 @@ class MainActivity : AppCompatActivity() {
                     )
 
                     movimentoRef.update(updates).addOnCompleteListener {
-                        getMoviments()
+                        movimentoRef.addSnapshotListener { snapshot, e ->
+                            if (snapshot != null && snapshot.exists()) {
+                                val moviment = snapshot.toObject(Moviment::class.java)
+                                if (moviment != null) {
+                                    movimentList.add(moviment)
+                                    adapterMoviment.notifyDataSetChanged()
+                                    configBalance()
+                                    dialog.dismiss()
+                                }
+                            }
+                        }
                     }
-
-                    dialog.dismiss()
 
                 } else {
                     edt_value.error = "Informe o valor."
@@ -153,7 +189,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        view.findViewById<Button>(R.id.btn_close).setOnClickListener { dialog.dismiss() }
+        btn_close.setOnClickListener { dialog.dismiss() }
 
         dialog = alertDialog.create()
         dialog.show()
@@ -193,7 +229,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configBalance() {
 
-        text_balance.text = ""
+        text_balance.text = "R$ 0,00"
 
         var gastos = 0.0
         var ganhos = 0.0
@@ -210,6 +246,11 @@ class MainActivity : AppCompatActivity() {
 
         val balance = ganhos - gastos
         text_balance.text = getString(R.string.text_value, GetMask.getValue(balance))
+    }
+
+    private fun configDate(){
+        val long = Timestamp(System.currentTimeMillis()).time
+        text_date.text = GetMask.getDate(long, 1)
     }
 
 }

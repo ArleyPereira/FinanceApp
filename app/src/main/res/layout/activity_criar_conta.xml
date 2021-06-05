@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 app:title="Criar conta"
                 app:titleTextColor="@color/white"
-                android:background="@color/color_primary"
+                android:background="@color/color_secondary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

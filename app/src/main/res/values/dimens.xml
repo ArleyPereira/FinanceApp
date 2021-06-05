@@ -11,4 +11,12 @@
     <dimen name="authentication_margin_title_edt">16dp</dimen>
     <dimen name="authentication_margin_button">16dp</dimen>
     <dimen name="authentication_margin_txt_btn">4dp</dimen>
+
+    <!-- Recupera Conta Activity -->
+    <dimen name="recover_account_margin_progress_bar">8dp</dimen>
+    <dimen name="recover_account_text_size_btn_send">16sp</dimen>
+    <dimen name="recover_account_margin_edt">8dp</dimen>
+    <dimen name="recover_account_padding_edt_email">16dp</dimen>
+    <dimen name="recover_account_margin_top_btn">16dp</dimen>
+    <dimen name="recover_account_margin_top_txt_email">32dp</dimen>
 </resources>

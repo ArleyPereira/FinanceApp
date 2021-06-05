@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="24dp"
     android:background="@drawable/bg_ganhos">
@@ -32,6 +32,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
         <android.widget.Button
@@ -44,8 +45,16 @@
             style="?android:attr/borderlessButtonStyle"
             android:textAllCaps="false"
             android:background="@drawable/bg_btn"
-            android:layout_marginTop="16dp"
             android:text="@string/btn_text_close"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:indeterminateTint="@color/white"
+            android:layout_weight="1"/>
 
         <android.widget.Button
             android:id="@+id/btn_save"
@@ -57,7 +66,6 @@
             style="?android:attr/borderlessButtonStyle"
             android:textAllCaps="false"
             android:background="@drawable/bg_btn"
-            android:layout_marginTop="16dp"
             android:text="@string/btn_text_save"/>
 
     </LinearLayout>
