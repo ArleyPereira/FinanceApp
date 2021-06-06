@@ -11,8 +11,6 @@ import com.br.apsmobile.R
 import com.br.apsmobile.helper.GetMask
 import com.br.apsmobile.model.Moviment
 import kotlinx.android.synthetic.main.layout_item_movimento.view.*
-import java.sql.Timestamp
-import java.util.*
 
 class AdapterMoviments(
     private var movimentList: MutableList<Moviment> = mutableListOf(),
@@ -32,11 +30,11 @@ class AdapterMoviments(
         holder.text_date_movement.text = moviment.date?.let { GetMask.getDate(it.time, 1) }
 
         if(moviment.type == "gastos"){
-            holder.text_value_movement.text = context.getString(R.string.text_value_negative, GetMask.getValue(moviment.value))
+            holder.text_value_movement.text = context.getString(R.string.text_value_negative, GetMask.getValue(moviment.value / 100))
             holder.img_bg_type.setImageResource(R.drawable.bg_gastos)
             holder.img_type.setImageResource(R.drawable.ic_arrow_up)
         }else {
-            holder.text_value_movement.text = context.getString(R.string.text_value, GetMask.getValue(moviment.value))
+            holder.text_value_movement.text = context.getString(R.string.text_value, GetMask.getValue(moviment.value / 100))
             holder.img_bg_type.setImageResource(R.drawable.bg_ganhos)
             holder.img_type.setImageResource(R.drawable.ic_arrow_down)
         }

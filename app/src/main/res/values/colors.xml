@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="color_remove">#FF0000</color>
     <color name="color_primary">#9564FD</color>
     <color name="color_secondary">#C378FF</color>
     <color name="color_hint">#55C378FF</color>

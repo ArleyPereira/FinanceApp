@@ -15,7 +15,7 @@
         android:background="@drawable/bg_edit"
         android:textColorHint="#F5A7C9"
         android:textColor="#F5A7C9"
-        android:inputType="textCapWords"
+        android:inputType="textCapWords|textNoSuggestions"
         android:hint="@string/edt_hint_description"
         android:padding="16dp" />
 

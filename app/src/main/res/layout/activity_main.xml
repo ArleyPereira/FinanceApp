@@ -229,7 +229,7 @@
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.tsuryo.swipeablerv.SwipeableRecyclerView
                 android:id="@+id/rv_moviments"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -238,8 +238,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                tools:itemCount="3"
-                tools:listitem="@layout/layout_item_movimento" />
+                app:leftBgColor="@color/blue"
+                app:leftImage="@drawable/ic_edit"
+                app:rightBgColor="@color/color_remove"
+                app:rightImage="@drawable/ic_remove" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"
